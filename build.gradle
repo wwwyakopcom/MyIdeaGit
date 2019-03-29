@@ -1,0 +1,87 @@
+apply plugin :'java'
+apply plugin :'war'
+apply plugin :"idea"
+apply plugin :"maven"
+apply plugin: 'org.akhikhl.gretty'
+//apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.akhikhl.gretty:gretty:2.0.0'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+if (!project.plugins.findPlugin(org.akhikhl.gretty.GrettyPlugin))
+    project.apply(plugin: org.akhikhl.gretty.GrettyPlugin)
+
+
+gretty {
+
+    httpPort = 8080
+    contextPath = '/MyGradleWeb'
+    host = "localhost"
+    httpEnabled = true
+    servletContainer = "tomcat8"
+    scanInterval = 1
+    fastReload = true
+    loggingLevel = "DEBUG"
+    consoleLogEnabled = true
+
+    debugPort = 8888
+    debugSuspend = true
+
+}
+
+//sourceSets{
+//    main{
+//            java{
+//                srcDir 'src/main/xxx'
+//            }
+//            resources{
+//                srcDir 'src/main/yy'
+//            }
+//    }
+//
+//}
+
+//plugins {
+//    id 'java'
+//    id 'war'
+//}
+
+group 'com.yanqun.gradle'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+////私服
+//dependencies{
+//    repositories{
+//        maven {
+//            url :  xxxxxx
+//        }
+//    }
+//}
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+}
+
+
+tasks.withType(JavaCompile){
+    options.encoding = "UTF-8"
+}
+
+[compileJava,javadoc,compileTestJava]*.options*.encoding = "UTF-8"
