@@ -5,6 +5,7 @@ apply plugin :"maven"
 apply plugin: 'org.akhikhl.gretty'
 //apply from: 'https://raw.github.com/akhikhl/gretty/master/pluginScripts/gretty.plugin'
 
+//....222222
 buildscript {
     repositories {
         mavenCentral()
